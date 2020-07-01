@@ -1,3 +1,18 @@
+// Copyright 2020 Douyu
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+
 package mockserver
 
 import (
@@ -28,6 +43,7 @@ type mockServer struct {
 	config        map[string]map[string]string
 }
 
+// NotificationHandler ...
 func (s *mockServer) NotificationHandler(rw http.ResponseWriter, req *http.Request) {
 	s.lock.Lock()
 	defer s.lock.Unlock()
@@ -56,6 +72,7 @@ func (s *mockServer) NotificationHandler(rw http.ResponseWriter, req *http.Reque
 	rw.Write(bts)
 }
 
+// ConfigHandler ...
 func (s *mockServer) ConfigHandler(rw http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 
@@ -74,6 +91,7 @@ func (s *mockServer) ConfigHandler(rw http.ResponseWriter, req *http.Request) {
 
 var server *mockServer
 
+// Set ...
 func (s *mockServer) Set(namespace, key, value string) {
 	server.lock.Lock()
 	defer server.lock.Unlock()
@@ -90,6 +108,7 @@ func (s *mockServer) Set(namespace, key, value string) {
 	s.config[namespace] = kv
 }
 
+// Get ...
 func (s *mockServer) Get(namespace string) map[string]string {
 	server.lock.Lock()
 	defer server.lock.Unlock()
@@ -101,6 +120,7 @@ func (s *mockServer) Get(namespace string) map[string]string {
 	return retM
 }
 
+// Delete ...
 func (s *mockServer) Delete(namespace, key string) {
 	server.lock.Lock()
 	defer server.lock.Unlock()

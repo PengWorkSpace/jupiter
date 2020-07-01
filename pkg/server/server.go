@@ -20,30 +20,31 @@ import (
 )
 
 // ServiceConfigurator represents service configurator
-type ServiceConfigurator struct {
+type ConfigInfo struct {
 	Routes []Route
 }
 
 // ServiceInfo represents service info
 type ServiceInfo struct {
-	Name       string            `json:"name"`
-	Scheme     string            `json:"scheme"`
-	Address    string            `json:"address" toml:"address"`
-	Weight     float64           `json:"weight"`
-	Enable     bool              `json:"enable"`
-	Healthy    bool              `json:"healthy"`
-	Metadata   map[string]string `json:"metadata"`
-	Region     string            `json:"region"`
-	Zone       string            `json:"zone"`
-	Deployment string            `json:"deployment"`
-	Services map[string]*Service `json:"services" toml:"services"`
+	Name       string              `json:"name"`
+	Scheme     string              `json:"scheme"`
+	Address    string              `json:"address" toml:"address"`
+	Weight     float64             `json:"weight"`
+	Enable     bool                `json:"enable"`
+	Healthy    bool                `json:"healthy"`
+	Metadata   map[string]string   `json:"metadata"`
+	Region     string              `json:"region"`
+	Zone       string              `json:"zone"`
+	Deployment string              `json:"deployment"`
+	Services   map[string]*Service `json:"services" toml:"services"`
 }
 
+// Service ...
 type Service struct {
-	Namespace string `json:"namespace" toml:"namespace"`
-	Name string `json:"name" toml:"name"`
-	Labels map[string]string `json:"labels" toml:"labels"`
-	Methods []string `json:"methods" toml:"methods"`
+	Namespace string            `json:"namespace" toml:"namespace"`
+	Name      string            `json:"name" toml:"name"`
+	Labels    map[string]string `json:"labels" toml:"labels"`
+	Methods   []string          `json:"methods" toml:"methods"`
 }
 
 // Label ...
